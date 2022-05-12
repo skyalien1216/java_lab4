@@ -14,6 +14,9 @@ public class CSVreader implements ReadStrategy {
      */
     @Override
     public List<Employee> read(String filepath) {
+        if(filepath.equals(""))
+            return null;
+
         List<Employee> employees = new ArrayList<>();
         try {
             FileReader filereader = new FileReader(filepath);
@@ -25,9 +28,16 @@ public class CSVreader implements ReadStrategy {
 
             String[] line;
             while( (line = csvReader.readNext()) != null)
-                //id, name, gender, dOB, department, salary
-                employees.add(new Employee(Integer.parseInt(line[0]), line[1], line[2], line[3],
-                        new Department(line[4].charAt(0), line[4].charAt(0)), Integer.parseInt(line[5])));
+            {
+                try{
+                    //id, name, gender, dOB, department, salary
+                    employees.add(new Employee(Integer.parseInt(line[0]), line[1], line[2], line[3],
+                            new Department(line[4].charAt(0), line[4].charAt(0)), Integer.parseInt(line[5])));
+                }
+                catch (Exception e){
+                    return null;
+                }
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
