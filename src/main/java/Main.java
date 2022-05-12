@@ -9,10 +9,16 @@ public class Main {
         empl.setReader(new CSVreader());
 
         empl.readEmployees(filepath);
+
         List<Employee> employees = empl.getEmployees();
 
-        for(Employee employee : employees)
-            if(employee.getDepartmentID() == 65)
-                System.out.println(employee.toString());
+        if(employees != null)
+        {
+            for(Employee employee : employees)
+                if(employee.getDepartmentID() == 65)
+                    System.out.println(employee.toString());
+        }
+        else
+           System.out.println("Error while reading!");
     }
 }

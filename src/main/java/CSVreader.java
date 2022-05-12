@@ -4,6 +4,7 @@ import com.opencsv.CSVReaderBuilder;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CSVreader implements ReadStrategy {
@@ -27,12 +28,20 @@ public class CSVreader implements ReadStrategy {
                     .build();
 
             String[] line;
+            int i =0;
             while( (line = csvReader.readNext()) != null)
             {
                 try{
-                    //id, name, gender, dOB, department, salary
-                    employees.add(new Employee(Integer.parseInt(line[0]), line[1], line[2], line[3],
-                            new Department(line[4].charAt(0), line[4].charAt(0)), Integer.parseInt(line[5])));
+                    int id = Integer.parseInt(line[0]);
+                    int salary = Integer.parseInt(line[5]);
+                    String name = line[1];
+                    String gender = line[2];
+                    String dob = line[3];
+                    char dep = line[4].charAt(0);
+
+                    if(name.equals("") || gender.equals("") || dob.equals("") || line[4].equals(""))
+                        throw new Exception("Broken File");
+                    employees.add(new Employee(id, name, gender, dob, new Department(dep, dep), salary));
                 }
                 catch (Exception e){
                     return null;
