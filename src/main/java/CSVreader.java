@@ -4,7 +4,6 @@ import com.opencsv.CSVReaderBuilder;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CSVreader implements ReadStrategy {
@@ -39,7 +38,7 @@ public class CSVreader implements ReadStrategy {
                     String dob = line[3];
                     char dep = line[4].charAt(0);
 
-                    if(name.equals("") || gender.equals("") || dob.equals("") || line[4].equals(""))
+                    if(name.equals("") || gender.equals("") || dob.equals(""))
                         throw new Exception("Broken File");
                     employees.add(new Employee(id, name, gender, dob, new Department(dep, dep), salary));
                 }

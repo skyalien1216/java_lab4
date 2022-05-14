@@ -1,4 +1,4 @@
-
+import java.util.Objects;
 
 public class Employee {
     private int id;
@@ -7,6 +7,19 @@ public class Employee {
     private Department department;
     private int salary;
     private String dateOfBirth;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id && salary == employee.salary && name.equals(employee.name) && gender.equals(employee.gender) && department.equals(employee.department) && dateOfBirth.equals(employee.dateOfBirth);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, department);
+    }
 
     @Override
     public String toString() {
